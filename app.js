@@ -264,11 +264,16 @@
   async function startBroadcastWithPeerJS(room, setStatus){
     cleanupPeerJS();
 
-    // 1) 카메라/마이크 스트림 획득
-    localStream = await navigator.mediaDevices.getUserMedia({ video:true, audio:true });
+    // 1) 화면 공유 스트림 획득 (getDisplayMedia)
+    //    브라우저에서 공유할 화면/창/탭을 선택하게 됨
+    localStream = await navigator.mediaDevices.getDisplayMedia({
+      video: true,
+      audio: true,
+    });
     const videoEl = $('#online-video');
     if(videoEl){
       videoEl.srcObject = localStream;
+      // 화면 공유 중에는 에코를 막기 위해 기본적으로 음소거 유지
       videoEl.muted = true;
       videoEl.play().catch(()=>{});
     }
