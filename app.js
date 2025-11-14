@@ -280,7 +280,7 @@
 
     peer = new Peer(room, {
       // PeerServer 설정에 맞춘 호스트/포트/경로
-      host: 10.82.15.122,
+      host: '10.82.15.122',
       port: 9000,
       path: '/myapp',
     });
