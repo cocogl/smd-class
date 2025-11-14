@@ -1,0 +1,12 @@
+{
+  "name": "lecture-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Live/Offline lecture site with HLS and WebRTC P2P streaming",
+  "scripts": {
+    "start:signal": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

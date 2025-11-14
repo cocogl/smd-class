@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>강의 플랫폼</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>강의 플랫폼</h1>
+  </header>
+
+  <main id="app" class="container">
+    <!-- Landing -->
+    <section id="landing" class="view active">
+      <h2>시청 모드 선택</h2>
+      <div class="mode-buttons">
+        <button id="btn-online" class="btn primary">온라인 (생방송)</button>
+        <button id="btn-offline" class="btn">오프라인 (녹화본)</button>
+      </div>
+    </section>
+
+    <!-- Online -->
+    <section id="online" class="view">
+      <div class="toolbar">
+        <button class="btn ghost" data-nav="home">← 뒤로</button>
+        <h2>온라인 (현재 방송 중)</h2>
+        <div style="flex:1"></div>
+        <button id="btn-add-stream" class="btn secondary" title="HLS 스트림 추가">스트림 추가</button>
+      </div>
+      <div class="webrtc-controls" aria-label="WebRTC 생방송 제어">
+        <input id="room-code" type="text" placeholder="룸 코드 (예: math101)" />
+        <button id="btn-wrtc-broadcast" class="btn primary">방송 시작 (WebRTC)</button>
+        <button id="btn-wrtc-watch" class="btn">시청 (WebRTC)</button>
+        <span id="wrtc-status" class="status"></span>
+      </div>
+      <div class="layout">
+        <aside class="list" id="online-list" aria-label="현재 방송 중 목록"></aside>
+        <section class="player">
+          <div class="player-box">
+            <video id="online-video" controls playsinline></video>
+          </div>
+          <div class="player-actions">
+            <div class="title-row">
+              <h3 id="online-title">강의를 선택하세요</h3>
+            </div>
+            <button id="online-qa" class="btn secondary" disabled>질의응답</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Offline -->
+    <section id="offline" class="view">
+      <div class="toolbar">
+        <button class="btn ghost" data-nav="home">← 뒤로</button>
+        <h2>오프라인 (녹화본)</h2>
+      </div>
+      <div class="layout">
+        <aside class="list" id="offline-list" aria-label="녹화본 목록"></aside>
+        <section class="player">
+          <div class="player-box">
+            <video id="offline-video" controls playsinline></video>
+          </div>
+          <div class="player-actions">
+            <div class="title-row">
+              <h3 id="offline-title">강의를 선택하세요</h3>
+            </div>
+            <button id="offline-qa" class="btn secondary" disabled>질의응답</button>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <!-- Q&A Modal -->
+  <div id="qa-modal" class="modal" aria-hidden="true" role="dialog" aria-label="질의응답">
+    <div class="modal-backdrop" data-close="qa"></div>
+    <div class="modal-content" role="document">
+      <header class="modal-header">
+        <h3 id="qa-title">질의응답</h3>
+        <button class="icon-button" title="닫기" aria-label="닫기" data-close="qa">✕</button>
+      </header>
+      <section id="qa-thread" class="qa-thread" aria-live="polite"></section>
+      <form id="qa-form" class="qa-form">
+        <input id="qa-author" type="text" placeholder="이름 (선택)" />
+        <textarea id="qa-input" rows="3" placeholder="질문 또는 의견을 입력하세요" required></textarea>
+        <div class="qa-actions">
+          <button type="submit" class="btn primary">등록</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
